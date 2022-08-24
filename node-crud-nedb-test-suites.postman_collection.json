@@ -1,0 +1,351 @@
+{
+	"info": {
+		"_postman_id": "0e914783-6d62-48bf-849e-d26da47b8aed",
+		"name": "node-crud-nedb-test-suites",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12250729"
+	},
+	"item": [
+		{
+			"name": "Smoke Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Node CRUD NeDB App is Running\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4300/api/v1/test",
+					"host": [
+						"localhost"
+					],
+					"port": "4300",
+					"path": [
+						"api",
+						"v1",
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET API Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4300/api/v1/students",
+					"host": [
+						"localhost"
+					],
+					"port": "4300",
+					"path": [
+						"api",
+						"v1",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST API Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Student added successfully\");\r",
+							"});\r",
+							"\r",
+							"let jsonData = JSON.parse(responseBody);\r",
+							"pm.globals.set(\"student_id\", jsonData.studentId);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentName\":\"Dummy\",\r\n    \"rollNumber\":\"9999\",\r\n    \"city\":\"ABCDE\",\r\n    \"module\": \"MERN\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4300/api/v1/students",
+					"host": [
+						"localhost"
+					],
+					"port": "4300",
+					"path": [
+						"api",
+						"v1",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET 1 Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"9999\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Dummy\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"ABCDE\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4300/api/v1/students/{{student_id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "4300",
+					"path": [
+						"api",
+						"v1",
+						"students",
+						"{{student_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH 1 Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Student updated successfully\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentName\":\"DummyUpdated\",\r\n    \"rollNumber\":\"9999\",\r\n    \"city\":\"ABCDE\",\r\n    \"module\": \"MERN\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4300/api/v1/students/{{student_id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "4300",
+					"path": [
+						"api",
+						"v1",
+						"students",
+						"{{student_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET 1 Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"DummyUpdated\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4300/api/v1/students/{{student_id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "4300",
+					"path": [
+						"api",
+						"v1",
+						"students",
+						"{{student_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE API Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Student removed successfully\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentName\":\"Ali\",\r\n    \"rollNumber\":\"5001\",\r\n    \"city\":\"Islamabad\",\r\n    \"module\": \"MERN\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4300/api/v1/students/{{student_id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "4300",
+					"path": [
+						"api",
+						"v1",
+						"students",
+						"{{student_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET 1 Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Student with this ID does not exist\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4300/api/v1/students/{{student_id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "4300",
+					"path": [
+						"api",
+						"v1",
+						"students",
+						"{{student_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

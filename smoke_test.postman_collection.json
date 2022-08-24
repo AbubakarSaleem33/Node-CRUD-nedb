@@ -1,0 +1,81 @@
+{
+	"info": {
+		"_postman_id": "c30aee95-ccfb-40ae-b988-78178bfb1403",
+		"name": "Smoke Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12250729"
+	},
+	"item": [
+		{
+			"name": "Smoke Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Node CRUD NeDB App is Running\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4300/api/v1/test",
+					"host": [
+						"localhost"
+					],
+					"port": "4300",
+					"path": [
+						"api",
+						"v1",
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET API Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4300/api/v1/students",
+					"host": [
+						"localhost"
+					],
+					"port": "4300",
+					"path": [
+						"api",
+						"v1",
+						"students"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
